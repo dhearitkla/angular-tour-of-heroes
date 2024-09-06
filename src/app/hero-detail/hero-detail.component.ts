@@ -9,11 +9,7 @@ import { HeroService } from '../hero.service';
 @Component({
   selector: 'app-hero-detail',
   standalone: true,
-  imports: [
-    NgIf,
-    FormsModule,
-    UpperCasePipe
-  ],
+  imports: [NgIf, FormsModule, UpperCasePipe],
   templateUrl: './hero-detail.component.html',
   styleUrl: './hero-detail.component.css'
 })
@@ -38,5 +34,12 @@ export class HeroDetailComponent {
 
   goBack(): void {
     this.location.back();
+  }
+
+  save(): void {
+    if (this.hero) {
+      this.heroService.updateHero(this.hero)
+        .subscribe(() => this.goBack());
+    }
   }
 }
